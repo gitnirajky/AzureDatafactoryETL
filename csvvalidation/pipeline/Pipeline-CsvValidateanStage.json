@@ -52,6 +52,25 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "ForEachfile",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Filter Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter Files').output.value.name",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
