@@ -1,0 +1,12 @@
+{
+	"name": "AzureBlobStorage",
+	"properties": {
+		"description": "Blob File Location",
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://storageaccountg.blob.core.windows.net",
+			"accountKind": "StorageV2"
+		}
+	}
+}
