@@ -1,0 +1,22 @@
+{
+	"name": "DelimitedTextFileLocation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureFileStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"folderPath": "ToProcess"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
