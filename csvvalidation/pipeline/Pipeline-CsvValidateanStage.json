@@ -109,20 +109,6 @@
 								},
 								"enableStaging": false,
 								"validateDataConsistency": true,
-								"logSettings": {
-									"enableCopyActivityLog": true,
-									"copyActivityLogSettings": {
-										"logLevel": "Warning",
-										"enableReliableLogging": false
-									},
-									"logLocationSettings": {
-										"linkedServiceName": {
-											"referenceName": "AzureBlobStorage",
-											"type": "LinkedServiceReference"
-										},
-										"path": "toprocess"
-									}
-								},
 								"translator": {
 									"type": "TabularTranslator",
 									"typeConversion": true,
