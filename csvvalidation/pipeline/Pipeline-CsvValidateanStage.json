@@ -23,7 +23,8 @@
 						"childItems"
 					],
 					"storeSettings": {
-						"type": "AzureFileStorageReadSettings"
+						"type": "AzureFileStorageReadSettings",
+						"recursive": true
 					},
 					"formatSettings": {
 						"type": "DelimitedTextReadSettings"
@@ -72,8 +73,9 @@
 					},
 					"activities": [
 						{
-							"name": "Get Metadata1",
-							"type": "GetMetadata",
+							"name": "CopyFilestoBlob",
+							"description": "Copy csv files from file share to blob for processing",
+							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "7.00:00:00",
@@ -84,20 +86,30 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataset": {
-									"referenceName": "DelimitedTextFileLocation",
-									"type": "DatasetReference"
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureFileStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
 								},
-								"fieldList": [
-									"itemName"
-								],
-								"storeSettings": {
-									"type": "AzureFileStorageReadSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "DelimitedTextAzureFile",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
-							}
+							]
 						}
 					]
 				}
