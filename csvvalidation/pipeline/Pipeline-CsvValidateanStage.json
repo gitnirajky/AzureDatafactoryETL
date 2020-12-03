@@ -74,7 +74,7 @@
 					"batchCount": 4,
 					"activities": [
 						{
-							"name": "CopyFilestoBlob",
+							"name": "CopyFiletoBlob",
 							"description": "Copy csv files from file share to blob for processing",
 							"type": "Copy",
 							"dependsOn": [],
@@ -150,7 +150,7 @@
 							"type": "GetMetadata",
 							"dependsOn": [
 								{
-									"activity": "CopyFilestoBlob",
+									"activity": "CopyFiletoBlob",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -179,7 +179,8 @@
 									"structure"
 								],
 								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings"
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
 								},
 								"formatSettings": {
 									"type": "DelimitedTextReadSettings"
