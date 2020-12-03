@@ -90,7 +90,7 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "AzureFileStorageReadSettings",
-										"recursive": true
+										"recursive": false
 									},
 									"formatSettings": {
 										"type": "DelimitedTextReadSettings"
@@ -108,7 +108,7 @@
 									}
 								},
 								"enableStaging": false,
-								"validateDataConsistency": true,
+								"validateDataConsistency": false,
 								"translator": {
 									"type": "TabularTranslator",
 									"typeConversion": true,
