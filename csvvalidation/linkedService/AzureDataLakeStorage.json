@@ -1,0 +1,11 @@
+{
+	"name": "AzureDataLakeStorage",
+	"properties": {
+		"description": "Azure Data Lake",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://adlsgen2de.dfs.core.windows.net"
+		}
+	}
+}
