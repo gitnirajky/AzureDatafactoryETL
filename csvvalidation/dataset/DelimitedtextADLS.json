@@ -12,7 +12,7 @@
 			},
 			"FileName": {
 				"type": "string",
-				"defaultValue": "abc.csv"
+				"defaultValue": "*.csv"
 			}
 		},
 		"annotations": [],
@@ -20,6 +20,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
 				"folderPath": {
 					"value": "@dataset().FileFolder",
 					"type": "Expression"
