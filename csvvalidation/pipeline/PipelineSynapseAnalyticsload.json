@@ -1,0 +1,100 @@
+{
+	"name": "PipelineSynapseAnalyticsload",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data- Polybase",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "/@{'MGA1'}/@{'*.csv'}"
+					},
+					{
+						"name": "Destination",
+						"value": "@{'schema'}.@{'table'}"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBatchSize": 10000,
+						"preCopyScript": {
+							"value": "EXEC dbo.ClearStagingTable  '@{pipeline().parameters.TargetTableSchema}' , 'pipeline().parameters.TargetTableName'",
+							"type": "Expression"
+						},
+						"maxConcurrentConnections": 1,
+						"allowPolyBase": true,
+						"polyBaseSettings": {
+							"rejectValue": 2,
+							"rejectType": "value",
+							"useTypeDefault": true
+						},
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedtextADLS",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileFolder": "MGA1",
+							"FileName": "*.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSynapseAnalyticsTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.TargetTableSchema",
+								"type": "Expression"
+							},
+							"SchemaName": {
+								"value": "@pipeline().parameters.TargetTableName",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"SourceFolder": {
+				"type": "string"
+			},
+			"SourceFile": {
+				"type": "string"
+			},
+			"TargetTableSchema": {
+				"type": "string"
+			},
+			"TargetTableName": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}

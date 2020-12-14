@@ -8,11 +8,11 @@
 		"parameters": {
 			"FileFolder": {
 				"type": "string",
-				"defaultValue": "MGA1"
+				"defaultValue": "mga1"
 			},
 			"FileName": {
 				"type": "string",
-				"defaultValue": "*.csv"
+				"defaultValue": "PostMgr_PRM_Kuman_20200212_1201.csv"
 			}
 		},
 		"annotations": [],
@@ -27,7 +27,8 @@
 				"folderPath": {
 					"value": "@dataset().FileFolder",
 					"type": "Expression"
-				}
+				},
+				"fileSystem": "mga1"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
