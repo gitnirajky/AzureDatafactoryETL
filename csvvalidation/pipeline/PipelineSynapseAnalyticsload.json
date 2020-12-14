@@ -58,8 +58,14 @@
 						"referenceName": "DelimitedtextADLS",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileFolder": "MGA1",
-							"FileName": "*.csv"
+							"FileFolder": {
+								"value": "@pipeline().parameters.SourceFolder",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@pipeline().parameters.SourceFile",
+								"type": "Expression"
+							}
 						}
 					}
 				],
