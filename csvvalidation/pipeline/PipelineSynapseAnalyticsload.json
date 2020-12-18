@@ -101,6 +101,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "SynapseLoad"
+		},
 		"annotations": []
 	}
 }
