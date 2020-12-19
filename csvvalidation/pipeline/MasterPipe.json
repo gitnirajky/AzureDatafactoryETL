@@ -68,7 +68,7 @@
 									"type": "Expression"
 								},
 								"storedProcedureParameters": {
-									"@mappingID": {
+									"mappingID": {
 										"value": {
 											"value": "@{item().Parameter}",
 											"type": "Expression"
@@ -88,7 +88,8 @@
 		],
 		"parameters": {
 			"GroupName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2"
 			}
 		},
 		"folder": {
