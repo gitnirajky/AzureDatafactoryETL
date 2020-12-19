@@ -127,6 +127,10 @@
 										"TableName": {
 											"value": "@item().TargetTable",
 											"type": "Expression"
+										},
+										"SchemaName": {
+											"value": "@item().TargetSchema",
+											"type": "Expression"
 										}
 									}
 								}
