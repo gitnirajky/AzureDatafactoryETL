@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LookupMGA",
-				"type": "Lookup",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -16,16 +16,46 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT * FROM ",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
 					},
-					"dataset": {
-						"referenceName": "AzureSqlTable",
-						"type": "DatasetReference"
+					"sink": {
+						"type": "SqlDWSink",
+						"allowPolyBase": true,
+						"polyBaseSettings": {
+							"rejectValue": 0,
+							"rejectType": "value",
+							"useTypeDefault": true
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedtextADLS",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileFolder": "mga1",
+							"FileName": "PostMgr_PRM_Kuman_20200212_1201.csv"
+						}
 					}
-				}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSynapseAnalyticsTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": "MGA1.stage_Transactiondata"
+						}
+					}
+				]
 			}
 		],
 		"folder": {
