@@ -50,10 +50,7 @@
 				"outputs": [
 					{
 						"referenceName": "AzureSynapseAnalyticsTable",
-						"type": "DatasetReference",
-						"parameters": {
-							"TableName": "MGA1.stage_Transactiondata"
-						}
+						"type": "DatasetReference"
 					}
 				]
 			}
