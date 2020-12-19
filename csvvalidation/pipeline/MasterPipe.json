@@ -64,7 +64,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"storedProcedureName": {
-									"value": "EXEC @{item().SPName}  @{item().Parameter}",
+									"value": "@{item().SPName}  @{item().Parameter}",
 									"type": "Expression"
 								}
 							},
