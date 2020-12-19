@@ -105,7 +105,7 @@
 											"type": "Expression"
 										},
 										"FileName": {
-											"value": "PostMgr_PRM_Kuman_20200212_1201.csv",
+											"value": "@{item().SourceFilePrefix}*.csv",
 											"type": "Expression"
 										}
 									}
