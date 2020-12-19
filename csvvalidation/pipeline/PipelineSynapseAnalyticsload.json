@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT SourceFoler, SourceFilePrefix, TargetTable, Mapping\nFROM \nExtractMetadata\n",
+						"sqlReaderQuery": "SELECT SourceFolder, SourceFilePrefix, TargetTable, Mapping\nFROM \nExtractMetadata\nExtractMetadata\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
