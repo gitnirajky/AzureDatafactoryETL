@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data- Polybase",
-				"type": "Copy",
+				"name": "LookupMGAFiles",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -13,78 +13,119 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "Source",
-						"value": "/@{'MGA1'}/@{'*.csv'}"
-					},
-					{
-						"name": "Destination",
-						"value": "@{'schema'}.@{'table'}"
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": false,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT SourceFoler, SourceFilePrefix, TargetTable, Mapping\nFROM \nExtractMetadata\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
-					"sink": {
-						"type": "SqlDWSink",
-						"writeBatchSize": 10000,
-						"preCopyScript": {
-							"value": "EXEC dbo.ClearStagingTable  '@{pipeline().parameters.TargetTableSchema}' , 'pipeline().parameters.TargetTableName'",
-							"type": "Expression"
-						},
-						"maxConcurrentConnections": 1,
-						"allowPolyBase": true,
-						"polyBaseSettings": {
-							"rejectValue": 2,
-							"rejectType": "value",
-							"useTypeDefault": true
-						},
-						"disableMetricsCollection": false
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference"
 					},
-					"enableStaging": false
-				},
-				"inputs": [
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "EachExtract",
+				"type": "ForEach",
+				"dependsOn": [
 					{
-						"referenceName": "DelimitedtextADLS",
-						"type": "DatasetReference",
-						"parameters": {
-							"FileFolder": {
-								"value": "@pipeline().parameters.SourceFolder",
-								"type": "Expression"
-							},
-							"FileName": {
-								"value": "@pipeline().parameters.SourceFile",
-								"type": "Expression"
-							}
-						}
+						"activity": "LookupMGAFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
-				"outputs": [
-					{
-						"referenceName": "AzureSynapseAnalyticsTable",
-						"type": "DatasetReference",
-						"parameters": {
-							"TableName": {
-								"value": "@pipeline().parameters.TargetTableSchema",
-								"type": "Expression"
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupMGAFiles').output.value",
+						"type": "Expression"
+					},
+					"batchCount": 4,
+					"activities": [
+						{
+							"name": "Copy data- Polybase",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
 							},
-							"SchemaName": {
-								"value": "@pipeline().parameters.TargetTableName",
-								"type": "Expression"
-							}
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "/@{'MGA1'}/@{'*.csv'}"
+								},
+								{
+									"name": "Destination",
+									"value": "@{'schema'}.@{'table'}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": false,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlDWSink",
+									"allowPolyBase": true,
+									"polyBaseSettings": {
+										"rejectValue": 0,
+										"rejectType": "value",
+										"useTypeDefault": true
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"value": "@item().Mapping",
+									"type": "Expression"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DelimitedtextADLS",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileFolder": {
+											"value": "@item().SourceFoler",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@{item().SourceFilePrefix}*.csv",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureSynapseAnalyticsTable",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableName": {
+											"value": "@item().TargetTable",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
-					}
-				]
+					]
+				}
 			}
 		],
 		"parameters": {

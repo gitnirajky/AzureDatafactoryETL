@@ -9,10 +9,6 @@
 			"TableName": {
 				"type": "string",
 				"defaultValue": "table"
-			},
-			"SchemaName": {
-				"type": "string",
-				"defaultValue": "schema"
 			}
 		},
 		"folder": {
