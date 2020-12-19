@@ -31,7 +31,7 @@
 				"fileSystem": "mga1"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "",
+			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
