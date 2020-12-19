@@ -92,7 +92,7 @@
 									"type": "AzureSqlSink",
 									"writeBatchSize": 10000,
 									"preCopyScript": {
-										"value": "Truncate Table @{item().TargetTable}",
+										"value": "Truncate Table @{item().TargetSchema}.@{item().TargetTable}",
 										"type": "Expression"
 									},
 									"disableMetricsCollection": false
