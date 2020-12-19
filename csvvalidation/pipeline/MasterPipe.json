@@ -64,8 +64,17 @@
 							"userProperties": [],
 							"typeProperties": {
 								"storedProcedureName": {
-									"value": "@{item().SPName}  @{item().Parameter}",
+									"value": "@{item().SPName}",
 									"type": "Expression"
+								},
+								"storedProcedureParameters": {
+									"@mappingID": {
+										"value": {
+											"value": "@{item().Parameter}",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
 								}
 							},
 							"linkedServiceName": {
