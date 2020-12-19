@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT SPName, Parameter FROM SpMetadata WHERE GroupName = @{pipeline().parameters.groupID}",
+							"value": "SELECT SPName, Parameter FROM SpMetadata WHERE GroupName = @{pipeline().parameters.GroupName}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -78,7 +78,7 @@
 			}
 		],
 		"parameters": {
-			"groupID": {
+			"GroupName": {
 				"type": "string"
 			}
 		},
