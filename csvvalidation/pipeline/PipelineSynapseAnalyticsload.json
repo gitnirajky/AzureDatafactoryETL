@@ -201,13 +201,7 @@
 									"referenceName": "MasterPipe",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true,
-								"parameters": {
-									"groupID": {
-										"value": "@item().GroupName",
-										"type": "Expression"
-									}
-								}
+								"waitOnCompletion": true
 							}
 						}
 					]
