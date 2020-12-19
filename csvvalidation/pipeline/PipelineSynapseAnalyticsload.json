@@ -128,20 +128,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"SourceFolder": {
-				"type": "string"
-			},
-			"SourceFile": {
-				"type": "string"
-			},
-			"TargetTableSchema": {
-				"type": "string"
-			},
-			"TargetTableName": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "SynapseLoad"
 		},
