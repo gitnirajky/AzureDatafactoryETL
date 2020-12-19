@@ -5,12 +5,6 @@
 			"referenceName": "AzureSynapseAnalytics",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"TableName": {
-				"type": "string",
-				"defaultValue": "table"
-			}
-		},
 		"folder": {
 			"name": "SynapseLink"
 		},
