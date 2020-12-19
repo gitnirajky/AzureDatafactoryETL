@@ -18,10 +18,8 @@
 		"type": "AzureSqlDWTable",
 		"schema": [],
 		"typeProperties": {
-			"table": {
-				"value": "@dataset().TableName",
-				"type": "Expression"
-			}
+			"schema": "MGA1",
+			"table": "stage_Transactiondata"
 		}
 	}
 }
