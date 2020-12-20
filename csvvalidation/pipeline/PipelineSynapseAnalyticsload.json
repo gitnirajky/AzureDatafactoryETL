@@ -214,7 +214,7 @@
 				}
 			},
 			{
-				"name": "SendEmail",
+				"name": "SendFailureEmailUsingLogicApp",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
