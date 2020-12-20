@@ -198,7 +198,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "MasterPipe",
+									"referenceName": "ExecuteSPPipe",
 									"type": "PipelineReference"
 								},
 								"waitOnCompletion": true,
