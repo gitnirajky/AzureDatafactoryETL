@@ -5,7 +5,14 @@
 			{
 				"name": "Lookupsptoexexute",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "SendEmail",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -83,6 +90,30 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "SendEmail",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-95.eastus.logic.azure.com:443/workflows/3752a392b0f14a5b9951515ace108efa/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gYBz13CCegdfH7MQ_LqddV8yWNbJXa-S8LD4TD1VDik",
+					"method": "POST",
+					"body": {
+						"DataFactoryName": "My Factory",
+						"EmailTo": "niraj_k_y@live.com",
+						"ErrorMessage": "Failed",
+						"PipelineName": "testpipe",
+						"Subject": "Failed Pile"
+					}
 				}
 			}
 		],
