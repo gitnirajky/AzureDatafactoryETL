@@ -1,2 +1,2 @@
 type,name,path,value
-csvvalidation.linkedservice,AzureKeyVault,typeProperties.baseUrl,"https://KeyVaultInstanceName.vault.azure.net/"
+linkedservice,AzureKeyVault,typeProperties.baseUrl,"https://KeyVaultInstanceName.vault.azure.net/"
