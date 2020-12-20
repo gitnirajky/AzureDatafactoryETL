@@ -1,0 +1,53 @@
+{
+	"name": "DelimitedtextADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileFolder": {
+				"type": "string",
+				"defaultValue": "mga1"
+			},
+			"FileName": {
+				"type": "string",
+				"defaultValue": "PostMgr_PRM_Kuman_20200212_1201.csv"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().FileFolder",
+					"type": "Expression"
+				},
+				"fileSystem": "mga1"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "FName",
+				"type": "String"
+			},
+			{
+				"name": "Lname",
+				"type": "String"
+			},
+			{
+				"name": "Address",
+				"type": "String"
+			}
+		]
+	}
+}
