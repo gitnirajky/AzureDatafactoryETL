@@ -1,2 +1,2 @@
 type,name,path,value
-linkedservice,AzureKeyVault,typeProperties.baseUrl,"https://KeyVaultInstanceName.vault.azure.net/"
+linkedService,AzureKeyVault,typeProperties.baseUrl,"https://KeyVaultInstanceName.vault.azure.net/"
