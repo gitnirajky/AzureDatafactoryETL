@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookupsptoexexute",
+				"name": "Lookupsptoexecute",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -36,7 +36,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Lookupsptoexexute",
+						"activity": "Lookupsptoexecute",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -45,7 +45,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Lookupsptoexexute').output.value",
+						"value": "@activity('Lookupsptoexecute').output.value",
 						"type": "Expression"
 					},
 					"batchCount": 4,
