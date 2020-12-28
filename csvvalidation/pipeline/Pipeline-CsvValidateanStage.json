@@ -239,6 +239,9 @@
 													"type": "DelimitedTextReadSettings"
 												}
 											},
+											"sink": {
+												"type": "AzureSqlSink"
+											},
 											"enableStaging": false
 										},
 										"inputs": [
@@ -247,6 +250,16 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileName": "@item().name"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "AzureSqlTableStaging",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableName": "stage_Transactiondata",
+													"SchemaName": "MGA1"
 												}
 											}
 										]
