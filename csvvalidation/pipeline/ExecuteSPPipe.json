@@ -45,7 +45,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Lookupsptoexexute').output.value",
+						"value": "@activity('Lookupsptoexecute').output.value",
 						"type": "Expression"
 					},
 					"batchCount": 4,
