@@ -193,7 +193,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Execute sp Pipeline for group",
+							"name": "Execute SP pipeline",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"userProperties": [],
